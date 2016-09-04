@@ -43,7 +43,18 @@ namespace GigHub.Controllers
             var gig = new Gig
             {
                 ArtistId = User.Identity.GetUserId(),
-                DateTime = DateTime.Parse(string.Format("{0} {1}", viewModel.Date, viewModel.Time)),
+
+                //This below line is not a good SoC, controller should not do the job of parsing
+                //a variable. So there is a INFORMATION EXPERT principal which means the class or
+                //the object has the information to do sth should be one that will carry that responsibility.
+                // In this case, it is viewModel who knows the Date and Time so it should be ViewModel to tackle
+                // the
+                //DateTime = DateTime.Parse(string.Format("{0} {1}", viewModel.Date, viewModel.Time)),
+
+                //Instead
+                DateTime = viewModel.DateTime,
+
+
                 GenreId = viewModel.Genre,
                 Venue = viewModel.Venue
 
